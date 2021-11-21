@@ -1,8 +1,8 @@
 import 'package:bmicalculator/bmicalculator.dart';
 import 'package:flutter/material.dart';
 
-Color backcolor = Colors.blue.shade900;
-Color backcolorcon = Colors.blue.shade800;
+Color backcolor = Colors.black;
+Color backcolorcon = Colors.black54;
 
 Color backbut = Colors.pink.shade900;
 Color backbut21 = Colors.pink.shade50;

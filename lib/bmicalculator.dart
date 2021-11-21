@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:bmicalculator/calculate.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +12,8 @@ int counter1 = 0;
 int counter2 = 0;
 double heightcm1 = 0;
 String heightcm = "";
-Color backcolor = Colors.blue.shade900;
-Color backcolorcon = Colors.blue.shade800;
+Color backcolor = Colors.black;
+Color backcolorcon = Colors.black54;
 
 Color backbut = Colors.pink.shade900;
 Color backbut21 = Colors.pink.shade50;

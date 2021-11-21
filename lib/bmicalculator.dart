@@ -8,9 +8,10 @@ class BmiCalculator extends StatefulWidget {
 }
 
 Color backcolor = Colors.blue.shade900;
-Color backcolorcon = Colors.blue.shade700;
+Color backcolorcon = Colors.blue.shade800;
 Color coloricon = Colors.white;
 double _currentSliderValue = 20;
+Color fontcolor = Colors.white;
 
 class _BmiCalculatorState extends State<BmiCalculator> {
   @override
@@ -24,8 +25,8 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                containerhalf(context, Icons.male_rounded),
-                containerhalf(context, Icons.female_rounded),
+                containerhalf(context, Icons.male_rounded, "Male"),
+                containerhalf(context, Icons.female_rounded, "Female"),
               ],
             ),
           ),
@@ -34,10 +35,19 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             color: backcolorcon,
             child: Column(
               children: [
-                Text("Height"),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.02,
+                    bottom: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  child: Text(
+                    "Height",
+                    style: TextStyle(color: fontcolor),
+                  ),
+                ),
                 Text(
                   "166 Cm",
-                  style: TextStyle(fontSize: 40),
+                  style: TextStyle(fontSize: 40, color: fontcolor),
                 ),
                 Slider(
                   value: _currentSliderValue,
@@ -62,7 +72,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Containerhalf1(heading1: "Weight"),
-                Containerhalf1(heading1: "dsdo"),
+                Containerhalf1(heading1: "Age"),
               ],
             ),
           ),
@@ -85,7 +95,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
   }
 }
 
-Widget containerhalf(context, iconcont) {
+Widget containerhalf(context, iconcont, name) {
   return Container(
     padding: EdgeInsets.all(
       MediaQuery.of(context).size.width * 0.04,
@@ -97,8 +107,10 @@ Widget containerhalf(context, iconcont) {
         Icon(iconcont,
             color: coloricon, size: MediaQuery.of(context).size.width * 0.3),
         Text(
-          "data",
-          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+          name,
+          style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.06,
+              color: fontcolor),
         )
       ],
     ),
@@ -127,19 +139,29 @@ class _Containerhalf1State extends State<Containerhalf1> {
         children: [
           Text(
             "${widget.heading1}",
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.05,
+                color: fontcolor),
           ),
           Text(
             "64",
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.12,
+                color: fontcolor),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.remove_circle),
-              Icon(Icons.add_circle),
+              Icon(
+                Icons.remove_circle,
+                color: fontcolor,
+                size: MediaQuery.of(context).size.width * 0.09,
+              ),
+              Icon(
+                Icons.add_circle,
+                color: fontcolor,
+                size: MediaQuery.of(context).size.width * 0.09,
+              ),
             ],
           )
         ],

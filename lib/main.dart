@@ -1,4 +1,5 @@
 import 'package:bmicalculator/bmicalculator.dart';
+import 'package:bmicalculator/calculate.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:bmicalculator/calculate.dart';
 import 'package:flutter/material.dart';
 
 class BmiCalculator extends StatefulWidget {
@@ -7,13 +10,28 @@ class BmiCalculator extends StatefulWidget {
   _BmiCalculatorState createState() => _BmiCalculatorState();
 }
 
+int counter1 = 0;
+int counter2 = 0;
+double heightcm1 = 0;
+String heightcm = "";
 Color backcolor = Colors.blue.shade900;
 Color backcolorcon = Colors.blue.shade800;
+
+Color backbut = Colors.pink.shade900;
+Color backbut21 = Colors.pink.shade50;
+
 Color coloricon = Colors.white;
-double _currentSliderValue = 20;
 Color fontcolor = Colors.white;
+double _currentSliderValue = 20;
 
 class _BmiCalculatorState extends State<BmiCalculator> {
+  height() {
+    setState(() {
+      heightcm1 = _currentSliderValue;
+      heightcm = num.parse(heightcm1.toString()).toStringAsFixed(1);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +64,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                   ),
                 ),
                 Text(
-                  "166 Cm",
+                  "$heightcm",
                   style: TextStyle(fontSize: 40, color: fontcolor),
                 ),
                 Slider(
@@ -60,6 +78,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                   onChanged: (double value) {
                     setState(() {
                       _currentSliderValue = value;
+                      height();
                     });
                   },
                 ),
@@ -71,8 +90,10 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Containerhalf1(heading1: "Weight"),
-                Containerhalf1(heading1: "Age"),
+                Containerhalf1(
+                    heading1: "Weight", counter: counter1, indexnum: "1"),
+                Containerhalf1(
+                    heading1: "Age", counter: counter2, indexnum: "2"),
               ],
             ),
           ),
@@ -80,11 +101,23 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                width: MediaQuery.of(context).size.width * 1,
-                color: Colors.blue,
+                margin:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+                width: MediaQuery.of(context).size.width * 0.95,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
                   child: Text("Calculate Your BMI"),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Calculate(
+                              weightcounter: counter1,
+                              agecounter: counter1,
+                              height: "$heightcm",
+                              gender: "male"),
+                        ));
+                  },
                 ),
               ),
             ),
@@ -118,15 +151,51 @@ Widget containerhalf(context, iconcont, name) {
 }
 
 class Containerhalf1 extends StatefulWidget {
-  const Containerhalf1({Key? key, required this.heading1}) : super(key: key);
+  const Containerhalf1(
+      {Key? key,
+      required this.heading1,
+      required this.counter,
+      required this.indexnum})
+      : super(key: key);
   final String heading1;
+  final int counter;
+  final String indexnum;
+
   @override
   _Containerhalf1State createState() => _Containerhalf1State();
 }
 
+int counteraa = 0;
 // var heading1 = "Weight";
 
 class _Containerhalf1State extends State<Containerhalf1> {
+  void _incrementCounter() {
+    setState(() {
+      if (widget.indexnum == "1") {
+        counter1++;
+      } else if (widget.indexnum == "2") {
+        counter2++;
+      }
+      print(counter1);
+      print(counter2);
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      // counteraa--;
+      // print(counteraa);
+      // print(counteraa);
+      if (widget.indexnum == "1") {
+        counter1--;
+      } else if (widget.indexnum == "2") {
+        counter2--;
+      }
+      print(counter1);
+      print(counter2);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -144,7 +213,7 @@ class _Containerhalf1State extends State<Containerhalf1> {
                 color: fontcolor),
           ),
           Text(
-            "64",
+            "${widget.counter}",
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width * 0.12,
                 color: fontcolor),
@@ -152,15 +221,25 @@ class _Containerhalf1State extends State<Containerhalf1> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.remove_circle,
-                color: fontcolor,
-                size: MediaQuery.of(context).size.width * 0.09,
+              InkWell(
+                onTap: () {
+                  _decrementCounter();
+                },
+                child: Icon(
+                  Icons.remove_circle,
+                  color: fontcolor,
+                  size: MediaQuery.of(context).size.width * 0.09,
+                ),
               ),
-              Icon(
-                Icons.add_circle,
-                color: fontcolor,
-                size: MediaQuery.of(context).size.width * 0.09,
+              InkWell(
+                onTap: () {
+                  _incrementCounter();
+                },
+                child: Icon(
+                  Icons.add_circle,
+                  color: fontcolor,
+                  size: MediaQuery.of(context).size.width * 0.09,
+                ),
               ),
             ],
           )

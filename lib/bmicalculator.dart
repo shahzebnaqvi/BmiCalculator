@@ -1,6 +1,23 @@
 import 'package:bmicalculator/calculate.dart';
 import 'package:flutter/material.dart';
 
+TextEditingController txt = TextEditingController();
+void increment1() {
+  counter1++;
+}
+
+void increment2() {
+  counter2++;
+}
+
+void decrement1() {
+  counter1--;
+}
+
+void decrement2() {
+  counter2--;
+}
+
 class BmiCalculator extends StatefulWidget {
   const BmiCalculator({Key? key}) : super(key: key);
 
@@ -89,9 +106,15 @@ class _BmiCalculatorState extends State<BmiCalculator> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Containerhalf1(
-                    heading1: "Weight", counter: counter1, indexnum: "1"),
+                    heading1: "Weight",
+                    counter: counter1,
+                    indexnum: "1",
+                    Onincrement: () => increment1()),
                 Containerhalf1(
-                    heading1: "Age", counter: counter2, indexnum: "2"),
+                    heading1: "Age",
+                    counter: counter2,
+                    indexnum: "2",
+                    Onincrement: () => increment1()),
               ],
             ),
           ),
@@ -153,11 +176,13 @@ class Containerhalf1 extends StatefulWidget {
       {Key? key,
       required this.heading1,
       required this.counter,
-      required this.indexnum})
+      required this.indexnum,
+      required this.Onincrement})
       : super(key: key);
   final String heading1;
   final int counter;
   final String indexnum;
+  final Function Onincrement;
 
   @override
   _Containerhalf1State createState() => _Containerhalf1State();
@@ -169,26 +194,18 @@ int counteraa = 0;
 class _Containerhalf1State extends State<Containerhalf1> {
   void _incrementCounter() {
     setState(() {
-      if (widget.indexnum == "1") {
-        counter1++;
-      } else if (widget.indexnum == "2") {
-        counter2++;
-      }
-      print(counter1);
-      print(counter2);
+      widget.Onincrement;
+      print(widget.Onincrement);
+      print(widget.counter);
     });
   }
 
   void _decrementCounter() {
     setState(() {
-      // counteraa--;
-      // print(counteraa);
-      // print(counteraa);
-      if (widget.indexnum == "1") {
-        counter1--;
-      } else if (widget.indexnum == "2") {
-        counter2--;
-      }
+      counteraa--;
+      print(counteraa);
+      print(counteraa);
+
       print(counter1);
       print(counter2);
     });

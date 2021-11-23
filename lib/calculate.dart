@@ -28,6 +28,8 @@ class Calculate extends StatefulWidget {
 }
 
 class _CalculateState extends State<Calculate> {
+  var ina = 0;
+  // var ina = widget.agecounter;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
